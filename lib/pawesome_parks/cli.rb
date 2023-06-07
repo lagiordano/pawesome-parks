@@ -8,7 +8,7 @@ class PawesomeParks::CLI
     ██╔═══╝ ██╔══██║██║███╗██║██╔══╝  ╚════██║██║   ██║██║╚██╔╝██║██╔══╝      ██╔═══╝ ██╔══██║██╔══██╗██╔═██╗ ╚════██║
     ██║     ██║  ██║╚███╔███╔╝███████╗███████║╚██████╔╝██║ ╚═╝ ██║███████╗    ██║     ██║  ██║██║  ██║██║  ██╗███████║
     ╚═╝     ╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
-    \n".light_green
+    \n".green
     puts "\nWelcome to Pawesome Parks!\n\n"
     puts "There are currently 51 dog-friendly parks within the City of Sydney council region in NSW, Australia. With a range of off-leash hours and other restrictions, this app will let you explore the most suitable park to take your furry friend!"
     retrieve_dog_parks
@@ -43,7 +43,7 @@ class PawesomeParks::CLI
             elsif choice.downcase == "exit"
                 exit_app
             else
-                puts "\nSorry, that is an invalid selection, please enter another option:".light_green
+                puts "\nSorry, that is an invalid selection, please enter another option:".green
             end
         end
     end
@@ -53,14 +53,14 @@ class PawesomeParks::CLI
         puts "1 - List all dog parks"
         puts "2 - Search for dog parks by suburb or postcode"
         puts "3 - View parks with unrestricted off-leash hours\n"
-        puts "\nPlease select an option from the menu above by entering '1', '2', or '3' below. You can also enter 'exit' to leave the application and 'menu' to bring up this menu at any time:".light_green
+        puts "\nPlease select an option from the menu above by entering '1', '2', or '3' below. You can also enter 'exit' to leave the application and 'menu' to bring up this menu at any time:".green
         gets.strip.downcase
     end
 
     def list_dog_parks
         puts "\nAll Dog Parks:\n"
         PawesomeParks::Park.park_names.each { |park| puts park }
-        puts "\nEnter one of the above park names to see more details, or enter 'menu' to return to the main menu:".light_green
+        puts "\nEnter one of the above park names to see more details, or enter 'menu' to return to the main menu:".green
         get_park_details_by_name
     end
 
@@ -72,31 +72,31 @@ class PawesomeParks::CLI
                 puts ""
                 chosen_park_instance = PawesomeParks::Park.find_by_name choice
                 print_park chosen_park_instance
-                puts "\nPlease enter another park name for more details or enter 'menu' to return to the main menu:".light_green
+                puts "\nPlease enter another park name for more details or enter 'menu' to return to the main menu:".green
             elsif choice == "exit"
                 exit_app
             elsif choice == "menu"
                 menu_selection
             else
-                puts "\nInvalid park name. Please enter a park name included in the list above:".light_green
+                puts "\nInvalid park name. Please enter a park name included in the list above:".green
             end
         end
     end
 
     def search_for_park 
-        puts "\nPlease enter a suburb name or postcode within the City of Sydney:".light_green
+        puts "\nPlease enter a suburb name or postcode within the City of Sydney:".green
         loop do 
             location = gets.strip.downcase
             if location.to_i != 0
                 search_by_postcode location
-                puts "\nPlease enter another postcode or suburb name for park details, enter 'menu' to return to the main menu:".light_green
+                puts "\nPlease enter another postcode or suburb name for park details, enter 'menu' to return to the main menu:".green
             elsif location == "exit"
                 exit_app
             elsif location == "menu"
                 menu_selection
             else
                 search_by_suburb location
-                puts "\nPlease enter another suburb name or postcode for park details, enter 'menu' to return to the main menu:".light_green
+                puts "\nPlease enter another suburb name or postcode for park details, enter 'menu' to return to the main menu:".green
             end
         end
     end
@@ -107,7 +107,7 @@ class PawesomeParks::CLI
             puts "\nDog parks at postcode #{location} include:\n\n"
             parks.each { |park| print_park park }
         else
-            puts "\nUnable to locate a dog park at that postcode. Postcodes with a dog park include:\n".light_green
+            puts "\nUnable to locate a dog park at that postcode. Postcodes with a dog park include:\n".green
             puts PawesomeParks::Park.postcodes.each { |postcode| postcode }
             puts ""
         end
@@ -119,7 +119,7 @@ class PawesomeParks::CLI
             puts "\nDog parks in #{location.capitalize} include:\n\n"
             parks.each { |park| print_park park }
         else
-            puts "\nUnable to locate a dog park at that suburb name. Suburbs with a dog park include:\n".light_green
+            puts "\nUnable to locate a dog park at that suburb name. Suburbs with a dog park include:\n".green
             PawesomeParks::Park.suburbs.each { |suburb| puts suburb.capitalize }
             puts ""
         end
@@ -129,7 +129,7 @@ class PawesomeParks::CLI
         puts "\nParks with unrestricted off-leash hours include:\n\n"
         parks = PawesomeParks::Park.unrestricted_off_leash_hours
         parks.each { |park| puts park.name }
-        puts "\nEnter one of the above parks name's to see more details, or enter 'menu' to return to the main menu:".light_green
+        puts "\nEnter one of the above parks name's to see more details, or enter 'menu' to return to the main menu:".green
         get_park_details_by_name
     end
 
