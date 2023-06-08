@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pawesome_parks (0.1.3)
+    pawesome_parks (0.1.4)
 
 GEM
   remote: https://rubygems.org/
